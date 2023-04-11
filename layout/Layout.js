@@ -9,7 +9,7 @@ const Layout = ({ children, page }) => {
         <meta name="description" content="Quisco Cafetería" />
       </Head>
 
-      <div className="md:flex">
+      <div className="md:flex max-w-screen-2xl mx-auto">
         <aside className="md:w-4/12 xl:w-1/4 2xl:w-1/5">
           <Sidebar />
         </aside>
