@@ -6,20 +6,22 @@ import { formatMoney } from '@/helpers';
 
 export const ModalProduct = () => {
   const [amount, setAmount] = useState(1);
-  const { product, handleChangeModal } = useKiosk();
+  const { product, handleChangeModal, handleAddOrder } = useKiosk();
 
   return (
     <div className="md:flex gap-10">
-      <div className="md:w-1/3">
+      {/* Image Product */}
+      <figure className="md:w-1/3">
         <Image
           width={300}
           height={400}
           src={`/assets/img/${product.image}.jpg`}
           alt={`Imagen producto ${product.name}`}
         />
-      </div>
+      </figure>
 
       <div className="md:w-2/3">
+        {/* Close btn */}
         <div className="flex justify-end">
           <button onClick={handleChangeModal}>
             <svg
@@ -39,11 +41,13 @@ export const ModalProduct = () => {
           </button>
         </div>
 
+        {/* Title */}
         <h1 className="text-3xl font-bold mt-5">{product.name}</h1>
         <p className="mt-5 font-black text-5xl text-amber-500">
           {formatMoney(product.price)}
         </p>
 
+        {/* Amount btns */}
         <div className="flex gap-4 mt-5">
           <button
             type="button"
@@ -93,6 +97,15 @@ export const ModalProduct = () => {
             </svg>
           </button>
         </div>
+
+        {/* Add order btn */}
+        <button
+          type="button"
+          className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded"
+          onClick={() => handleAddOrder({...product, amount})}
+        >
+          Añadir al pedido
+        </button>
       </div>
     </div>
   );
