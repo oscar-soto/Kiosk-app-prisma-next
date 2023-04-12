@@ -39,13 +39,29 @@ export const KioskProvider = ({ children }) => {
 
   // Toggle modal
   const handleChangeModal = () => {
-    setModal(!modal)
-  }
+    setModal(!modal);
+  };
 
   // Add order
-  const handleAddOrder = ({categoryId, image, ...product}) => {
-    setOrder([...order,product]);
-  }
+  const handleAddOrder = ({ categoryId, image, ...product }) => {
+    const exitsProductId = order.some(
+      (productState) => productState.id === product.id
+    );
+
+    if (exitsProductId) {
+      // Check order and updated
+      const orderUpdated = order.map((productState) =>
+        productState.id === product.id ? product : productState
+      );
+
+      // Updated state
+      setOrder(orderUpdated);
+
+      return;
+    }
+
+    setOrder([...order, product]);
+  };
 
   return (
     <KioskContext.Provider
