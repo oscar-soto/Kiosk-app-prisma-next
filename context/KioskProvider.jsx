@@ -6,6 +6,8 @@ const KioskContext = createContext();
 export const KioskProvider = ({ children }) => {
   const [categories, setCategories] = useState([]);
   const [currentCategory, setCurrentCategory] = useState({});
+  const [product, setProduct] = useState({});
+  const [modal, setModal] = useState(false)
 
   // Get categories from API
   const getCategories = async () => {
@@ -29,9 +31,27 @@ export const KioskProvider = ({ children }) => {
     setCurrentCategory(category[0]);
   };
 
+  // Set current product
+  const handleSetProduct = (product) => {
+    setProduct(product);
+  };
+
+  // Toggle modal
+  const handleChangeModal = () => {
+    setModal(!modal)
+  }
+
   return (
     <KioskContext.Provider
-      value={{ categories, currentCategory, handleClickCategory }}
+      value={{
+        categories,
+        currentCategory,
+        product,
+        modal,
+        handleClickCategory,
+        handleSetProduct,
+        handleChangeModal,
+      }}
     >
       {children}
     </KioskContext.Provider>
