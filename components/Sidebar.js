@@ -7,10 +7,12 @@ export const Sidebar = () => {
   return (
     <>
       <Image
-        width={300}
-        height={100}
+        width={0}
+        height={0}
         src="/assets/img/logo.svg"
         alt="Imagen del logotipo"
+        className='w-52 h-auto mx-auto'
+        priority
       />
 
       <nav className="mt-10">
