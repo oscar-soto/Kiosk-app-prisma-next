@@ -1,11 +1,13 @@
 import Modal from 'react-modal';
 import Head from 'next/head';
+import { ToastContainer } from 'react-toastify';
 
 import useKiosk from '@/hooks/useKiosk';
 
 import { Sidebar } from '@/components/Sidebar';
 import { ModalProduct } from '@/components/ModalProduct';
 
+import 'react-toastify/dist/ReactToastify.css'
 const customStyles = {
   content: {
     top: '50%',
@@ -21,6 +23,7 @@ Modal.setAppElement('#__next');
 
 const Layout = ({ children, page }) => {
   const { modal } = useKiosk();
+
   return (
     <>
       <Head>
@@ -43,6 +46,8 @@ const Layout = ({ children, page }) => {
           <ModalProduct />
         </Modal>
       )}
+
+      <ToastContainer />
     </>
   );
 };
