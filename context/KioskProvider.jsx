@@ -56,11 +56,12 @@ export const KioskProvider = ({ children }) => {
 
       // Updated state
       setOrder(orderUpdated);
-
+      setModal(false)
       return;
     }
 
     setOrder([...order, product]);
+    setModal(false)
   };
 
   return (
@@ -70,6 +71,7 @@ export const KioskProvider = ({ children }) => {
         currentCategory,
         product,
         modal,
+        order,
         handleClickCategory,
         handleSetProduct,
         handleChangeModal,

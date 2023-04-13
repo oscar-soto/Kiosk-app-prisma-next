@@ -1,12 +1,29 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 
 import useKiosk from '@/hooks/useKiosk';
 import { formatMoney } from '@/helpers';
 
 export const ModalProduct = () => {
+  const { product, handleChangeModal, handleAddOrder, order } = useKiosk();
   const [amount, setAmount] = useState(1);
-  const { product, handleChangeModal, handleAddOrder } = useKiosk();
+  const [edition, setEdition] = useState(false);
+
+  useEffect(() => {
+    // Check if the modal is in the order
+    const modalInOrder = order.some(
+      (orderState) => orderState.id === product.id
+    );
+
+    if (modalInOrder) {
+      const productEdit = order.find(
+        (orderState) => orderState.id === product.id
+      );
+
+      setEdition(true);
+      setAmount(productEdit.amount);
+    }
+  }, [order, product]);
 
   return (
     <div className="md:flex gap-10">
@@ -102,9 +119,9 @@ export const ModalProduct = () => {
         <button
           type="button"
           className="bg-indigo-600 hover:bg-indigo-800 px-5 py-2 mt-5 text-white font-bold uppercase rounded"
-          onClick={() => handleAddOrder({...product, amount})}
+          onClick={() => handleAddOrder({ ...product, amount })}
         >
-          Añadir al pedido
+          {edition ? 'Guardar cambios' : 'Añadir al pedido'}
         </button>
       </div>
     </div>
