@@ -10,6 +10,7 @@ export const KioskProvider = ({ children }) => {
   const [product, setProduct] = useState({});
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
+  // const [step, setStep] = useState(1)
 
   // Get categories from API
   const getCategories = async () => {
@@ -67,6 +68,11 @@ export const KioskProvider = ({ children }) => {
     setModal(false)
   };
 
+  // Changes Steps
+  // const handleChangeStep = (step) => {
+  //   setStep(step)
+  // }
+
   return (
     <KioskContext.Provider
       value={{
@@ -75,10 +81,12 @@ export const KioskProvider = ({ children }) => {
         product,
         modal,
         order,
+        // step,
         handleClickCategory,
         handleSetProduct,
         handleChangeModal,
         handleAddOrder,
+        // handleChangeStep
       }}
     >
       {children}
