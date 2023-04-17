@@ -45,7 +45,7 @@ export const KioskProvider = ({ children }) => {
   };
 
   // Add order
-  const handleAddOrder = ({ categoryId, image, ...product }) => {
+  const handleAddOrder = ({ categoryId, ...product }) => {
     const exitsProductId = order.some(
       (productState) => productState.id === product.id
     );
