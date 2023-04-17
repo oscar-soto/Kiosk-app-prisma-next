@@ -4,6 +4,7 @@ import { Category } from './Category';
 
 export const Sidebar = () => {
   const { categories } = useKiosk();
+  console.log(categories)
   return (
     <>
       <Image
