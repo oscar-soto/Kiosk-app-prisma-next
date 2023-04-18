@@ -1,5 +1,6 @@
-import axios from 'axios';
 import { createContext, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import axios from 'axios';
 import { toast } from 'react-toastify';
 
 const KioskContext = createContext();
@@ -11,6 +12,8 @@ export const KioskProvider = ({ children }) => {
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
   // const [step, setStep] = useState(1)
+
+  const router = useRouter()
 
   // Get categories from API
   const getCategories = async () => {
@@ -28,10 +31,12 @@ export const KioskProvider = ({ children }) => {
     setCurrentCategory(categories[0]);
   }, [categories]);
 
-  // Select category with click
+  // Page of the category
   const handleClickCategory = (id) => {
     const category = categories.filter((cat) => cat.id === id);
     setCurrentCategory(category[0]);
+
+    router.push('/')
   };
 
   // Set current product

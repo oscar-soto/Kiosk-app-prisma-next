@@ -7,9 +7,10 @@ export const Category = ({ category }) => {
 
   return (
     <div
-      className={`flex items-center gap-4 w-full border p-5 hover:bg-amber-400 ${
+      className={`flex items-center gap-4 w-full border p-5 hover:bg-amber-400 transition-colors duration-300 hover:cursor-pointer ${
         currentCategory?.id === id ? 'bg-amber-400' : null
       }`}
+      onClick={() => handleClickCategory(id)}
     >
       <Image
         width={0}
@@ -19,11 +20,7 @@ export const Category = ({ category }) => {
         className="w-16 h-auto"
       />
 
-      <button
-        type="button"
-        className="text-2xl font-bold hover:cursor-pointer"
-        onClick={() => handleClickCategory(id)}
-      >
+      <button type="button" className="text-2xl font-bold">
         {name}
       </button>
     </div>
