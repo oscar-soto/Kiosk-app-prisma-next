@@ -58,14 +58,13 @@ export const KioskProvider = ({ children }) => {
 
       // Updated state
       setOrder(orderUpdated);
-      toast.success('Guardado Correctamente')
+      toast.success('Guardado Correctamente');
     } else {
-
       setOrder([...order, product]);
-      toast.success('Agregado al Pedido')
+      toast.success('Agregado al Pedido');
     }
 
-    setModal(false)
+    setModal(false);
   };
 
   // Changes Steps
@@ -75,11 +74,17 @@ export const KioskProvider = ({ children }) => {
 
   // Edit Amount
   const handleEditAmount = (id) => {
-    const productUpdated = order.filter(product => product.id === id);
-    setProduct(productUpdated[0])
+    const orderUpdated = order.filter((product) => product.id === id);
+    setProduct(orderUpdated[0]);
 
     setModal(!modal);
-  }
+  };
+
+  // Delete a producto into the order
+  const handleDeleteProduct = (id) => {
+    const orderUpdated = order.filter((product) => product.id !== id);
+    setOrder(orderUpdated);
+  };
 
   return (
     <KioskContext.Provider
@@ -96,6 +101,7 @@ export const KioskProvider = ({ children }) => {
         handleAddOrder,
         // handleChangeStep
         handleEditAmount,
+        handleDeleteProduct,
       }}
     >
       {children}

@@ -5,7 +5,7 @@ import { formatMoney } from '@/helpers';
 export const SummaryProduct = ({ product }) => {
   const { name, image, price, amount, id } = product;
 
-  const {handleEditAmount} = useKiosk();
+  const { handleEditAmount, handleDeleteProduct } = useKiosk();
 
   return (
     <div className="shadow p-5 mb-3 flex gap-10 items-center">
@@ -49,6 +49,7 @@ export const SummaryProduct = ({ product }) => {
         <button
           type="button"
           className="bg-red-700 flex items-center gap-2 px-5 py-2 text-white rounded-md font-bold uppercase shadow-md w-full"
+          onClick={() => handleDeleteProduct(id)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
