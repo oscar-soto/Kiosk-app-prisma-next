@@ -1,9 +1,12 @@
 import Image from 'next/image';
-
+import useKiosk from '@/hooks/useKiosk';
 import { formatMoney } from '@/helpers';
 
 export const SummaryProduct = ({ product }) => {
-  const { name, image, price, amount } = product;
+  const { name, image, price, amount, id } = product;
+
+  const {handleEditAmount} = useKiosk();
+
   return (
     <div className="shadow p-5 mb-3 flex gap-10 items-center">
       <div className="md:w-1/6">
@@ -30,6 +33,7 @@ export const SummaryProduct = ({ product }) => {
         <button
           type="button"
           className="bg-sky-700 flex items-center gap-2 px-5 py-2 text-white rounded-md font-bold uppercase shadow-md w-full mb-3"
+          onClick={() => handleEditAmount(id)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
