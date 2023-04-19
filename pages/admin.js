@@ -6,7 +6,7 @@ import { Order } from '@/components/Order';
 export default function Admin() {
   const fetcher = () => axios('/api/orders').then((data) => data.data);
 
-  const { data, error, isLoading } = useSWR('/api/orders', fetcher);
+  const { data, error, isLoading } = useSWR('/api/orders', fetcher, {refreshInterval: 100});
 
   return (
     <AdminLayout page={'Admin'}>
