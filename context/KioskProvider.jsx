@@ -12,10 +12,10 @@ export const KioskProvider = ({ children }) => {
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
   const [name, setName] = useState('');
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState(0);
   // const [step, setStep] = useState(1)
 
-  const router = useRouter()
+  const router = useRouter();
 
   // Get categories from API
   const getCategories = async () => {
@@ -34,17 +34,19 @@ export const KioskProvider = ({ children }) => {
   }, [categories]);
 
   useEffect(() => {
-    const newTotal = order.reduce((total, product) => (product.price * product.amount) + total, 0)
+    const newTotal = order.reduce(
+      (total, product) => product.price * product.amount + total,
+      0
+    );
     setTotal(newTotal);
-  }, [order])
-  
+  }, [order]);
 
   // Page of the category
   const handleClickCategory = (id) => {
     const category = categories.filter((cat) => cat.id === id);
     setCurrentCategory(category[0]);
 
-    router.push('/')
+    router.push('/');
   };
 
   // Set current product
@@ -102,8 +104,18 @@ export const KioskProvider = ({ children }) => {
   // Send order from the form
   const sendOrder = async (e) => {
     e.preventDefault();
-    console.log(order)
-    console.log(name)
+
+    try {
+      const { data } = await axios.post('/api/orders', {
+        order,
+        name,
+        total,
+        date: Date.now().toString(),
+      });
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -125,7 +137,7 @@ export const KioskProvider = ({ children }) => {
         handleEditAmount,
         handleDeleteProduct,
         setName,
-        sendOrder
+        sendOrder,
       }}
     >
       {children}
