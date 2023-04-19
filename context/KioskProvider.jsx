@@ -106,15 +106,28 @@ export const KioskProvider = ({ children }) => {
     e.preventDefault();
 
     try {
-      const { data } = await axios.post('/api/orders', {
+      await axios.post('/api/orders', {
         order,
         name,
         total,
         date: Date.now().toString(),
       });
-      console.log(data);
+
+      // Reset App
+      setCurrentCategory(categories[0])
+      setOrder([])
+      setName('')
+      setTotal(0)
+
+      toast.success('Pedido Realizado Correctamente')
+
+      setTimeout(() => {
+        router.push('/')
+      }, 3000);
+      
     } catch (error) {
       console.log(error);
+      toast.error('Hubo Un Error En Realizar Su Pedido')
     }
   };
 
