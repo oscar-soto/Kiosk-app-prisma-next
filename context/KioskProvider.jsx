@@ -11,6 +11,7 @@ export const KioskProvider = ({ children }) => {
   const [product, setProduct] = useState({});
   const [modal, setModal] = useState(false);
   const [order, setOrder] = useState([]);
+  const [name, setName] = useState('');
   // const [step, setStep] = useState(1)
 
   const router = useRouter()
@@ -99,6 +100,7 @@ export const KioskProvider = ({ children }) => {
         product,
         modal,
         order,
+        name,
         // step,
         handleClickCategory,
         handleSetProduct,
@@ -107,6 +109,7 @@ export const KioskProvider = ({ children }) => {
         // handleChangeStep
         handleEditAmount,
         handleDeleteProduct,
+        setName,
       }}
     >
       {children}

@@ -3,11 +3,11 @@ import Layout from '@/layout/Layout';
 import useKiosk from '@/hooks/useKiosk';
 
 export default function Total() {
-  const { order } = useKiosk();
+  const { order, name, setName } = useKiosk();
 
   const checkOrder = useCallback(() => {
-    return order.length === 0;
-  }, [order]);
+    return order.length === 0 || name === '' || name.length < 3;
+  }, [order, name]);
 
   useEffect(() => {
     checkOrder();
@@ -25,8 +25,8 @@ export default function Total() {
       <form onSubmit={sendOrder}>
         <div>
           <label
-            className="block uppercase text-slate-800 font-bold text-xl"
             htmlFor="name"
+            className="block uppercase text-slate-800 font-bold text-xl"
           >
             Nombre
           </label>
@@ -35,6 +35,8 @@ export default function Total() {
             type="text"
             id="name"
             className="bg-gray-200 w-full mt-3 lg:w-1/3 p-2 rounded-md"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
           />
         </div>
 
